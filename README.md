@@ -117,5 +117,81 @@ Develop in source branch
 Deploy with npm run deploy
 
 GitHub Pages serves from main branch
+### Auto Deploy
+Add GitHub Actions Workflow
 
-That’s it 🚀
+In your repo, create this file:
+
+`.github/workflows/deploy.yml`
+
+```yaml
+name: Deploy Docusaurus to GitHub Pages
+
+on:
+  push:
+    branches:
+      - source   # 👈 Auto deploy only when pushing to source branch
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history needed for gh-pages
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # Docusaurus works best with Node 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build website
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: main   # 👈 deploy to main branch
+```
+
+## ⚡ Step 3: Commit & Push
+```bash
+git add .github/workflows/deploy.yml
+git commit -m "Add auto deploy workflow"
+git push origin source
+```
+
+## Everytime you make change in your site
+Save your changes locally
+
+Commit the changes
+```bash
+git add .
+git commit -m "Update docs (example: intro.md)"
+```
+
+Push to GitHub
+```bash
+git push origin source
+```
+Why?
+
+Your Docusaurus project is stored in GitHub
+
+GitHub Actions (or your deploy script) runs only when you push commits
+
+The deployment workflow takes the latest source branch, builds it, and publishes it to gh-pages
+
+So if you don’t commit & push, GitHub won’t know your site has changed → no auto-deploy.
+
+## ⚡ Quick cycle to remember:
+
+- npm run start → Preview locally (instant feedback)
+- Edit until happy
+- git add . && git commit -m "..." && git push → Trigger deploy
