@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkautomatic_excel=self.webpackChunkautomatic_excel||[]).push([[9647],{7121:(e,a,c)=>{c.r(a),c.d(a,{default:()=>i});c(6540);var s=c(4164),r=c(7559),t=c(5500),u=c(2831),l=c(1656),n=c(4848);function i(e){return(0,n.jsx)(t.e3,{className:(0,s.A)(r.G.wrapper.docsPages),children:(0,n.jsx)(l.A,{children:(0,u.v)(e.route.routes)})})}}}]);
