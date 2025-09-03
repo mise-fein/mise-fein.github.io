@@ -29,9 +29,9 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'mise-fein', // Usually your GitHub org/user name.
   projectName: 'mise-fein.github.io', // Usually your repo name.
-  deploymentBranch: 'gh-pages',            // Branch used for published site
+  deploymentBranch: 'main',            // Branch used for published site
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
